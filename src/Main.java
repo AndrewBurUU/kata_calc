@@ -19,22 +19,25 @@ public class Main {
         return res;
     }
 
-    public static String calc(String input) throws ScannerException {
-        String accepted = "-+*/";
-        int[] nums = new int[2];
-        int i = 0;
-        int j = 0;
-        char operation = ' ';
-        String [] parts = input.split(" ");
+    public static void checkStringLength(String [] parts) throws ScannerException {
         if (parts.length < 3) {
             throw new ScannerException("Слишком мало значений! Строка не является математической операцией! ");
         }
         if (parts.length > 3) {
             throw new ScannerException("Слишком много значений!");
         }
+    }
 
-        for (String part: parts) {
-            if ((j == 0) || (j == 2)) {
+    public static String calc(String input) throws ScannerException {
+        String accepted = "-+*/";
+        int[] nums = new int[2];
+        int i = 0;
+        char operation = ' ';
+        String [] parts = input.split(" ");
+        checkStringLength(parts);
+        for (int j = 0; j < 3; j++) {
+            String part = parts[j];
+            if (j == 0 || j == 2) {
                 if (isNumeric(part)) {
                     nums[i++] = Integer.parseInt(part);
                 } else {
@@ -49,9 +52,7 @@ public class Main {
                     }
                 }
             }
-            j++;
         }
-
         int res = 0;
         switch (operation) {
             case '+': res = nums[0] + nums[1]; break;
