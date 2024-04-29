@@ -4,16 +4,20 @@ import java.util.*;
 public class Main {
 
     public static boolean isNumeric(String str) throws ScannerException {
-        try {
-//            Double.parseDouble(str);
-            Integer.parseInt(str);
-            if (Integer.parseInt(str) > 10) {
-                throw new ScannerException("Число должно быть в диапазоне от 1 до 10 включительно.");
+        boolean res = false;
+        if (str.contains(".") || str.contains(",")) {
+            throw new ScannerException("Дробное число!");
+        } else {
+            try {
+                if (Integer.parseInt(str) > 10) {
+                    throw new ScannerException("Число должно быть в диапазоне от 1 до 10 включительно.");
+                } else {
+                    res = true;
+                }
+            } catch (NumberFormatException e) {
             }
-            return true;
-        } catch(NumberFormatException e){
-            return false;
         }
+        return res;
     }
 
     public static String calc(String input) throws ScannerException {
