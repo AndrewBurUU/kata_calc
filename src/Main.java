@@ -34,9 +34,14 @@ public class Main {
         }
 
         for (String part: parts) {
-            if (isNumeric(part) && ((j == 0) || (j == 2))) {
-                nums[i++] = Integer.parseInt(part);
-            } else {
+            if ((j == 0) || (j == 2)) {
+                if (isNumeric(part)) {
+                    nums[i++] = Integer.parseInt(part);
+                } else {
+                    throw new ScannerException("Не правильное число!");
+                }
+            }
+            if (j == 1) {
                 if (part.length() == 1) {
                     operation = part.charAt(0);
                     if (accepted.indexOf(operation) < 0) {
