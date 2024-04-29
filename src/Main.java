@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -24,17 +23,18 @@ public class Main {
         String accepted = "-+*/";
         int[] nums = new int[2];
         int i = 0;
+        int j = 0;
         char operation = ' ';
         String [] parts = input.split(" ");
         if (parts.length < 3) {
-            throw new ScannerException("Слишком мало значений! Выражение надо вводить одной строкой.");
+            throw new ScannerException("Слишком мало значений! Строка не является математической операцией! ");
         }
         if (parts.length > 3) {
             throw new ScannerException("Слишком много значений!");
         }
+
         for (String part: parts) {
-            if (isNumeric(part)) {
-//                System.out.println(member);
+            if (isNumeric(part) && ((j == 0) || (j == 2))) {
                 nums[i++] = Integer.parseInt(part);
             } else {
                 if (part.length() == 1) {
@@ -44,7 +44,9 @@ public class Main {
                     }
                 }
             }
+            j++;
         }
+
         int res = 0;
         switch (operation) {
             case '+': res = nums[0] + nums[1]; break;
